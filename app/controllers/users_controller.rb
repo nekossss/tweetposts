@@ -7,6 +7,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @tweetposts = @user.tweetposts.order('created_at DESC').page(params[:page])
+    counts(@user)
   end
 
   def new
