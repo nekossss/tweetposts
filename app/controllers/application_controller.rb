@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
     @count_tweetposts = user.tweetposts.count
     @count_followings = user.followings.count
     @count_followers = user.followers.count
+    @count_likes = user.likerelationships.count
   end
   
 end

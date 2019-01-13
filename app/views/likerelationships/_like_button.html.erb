@@ -1,0 +1,15 @@
+<% unless current_user == tweetpost.user %>
+  <% if current_user.liking?(tweetpost) %>
+    <%= form_for(current_user.likerelationships.find_by(tweetpost_id: tweetpost.id), html: { method: :delete }) do |f| %>
+      <%= hidden_field_tag :tweetpost_id, tweetpost.id %>
+      <%= f.submit 'Unlike', class: 'btn btn-default btn-xs' %>
+    <% end %>
+  <% else %>
+    <%= form_for(current_user.likerelationships.build) do |f| %>
+      <%= hidden_field_tag :tweetpost_id, tweetpost.id %>
+      <%= f.submit 'like', class: 'btn btn-warning btn-xs' %>
+    <% end %>
+  <% end %>
+<% end %>
+
+

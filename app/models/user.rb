@@ -12,6 +12,9 @@ class User < ApplicationRecord
   has_many :reverses_of_relationship, class_name: 'Relationship', foreign_key: 'follow_id'
   has_many :followers, through: :reverses_of_relationship, source: :user
   
+  has_many :likerelationships
+  has_many :likings, through: :likerelationships, source: :tweetpost
+  
   
   def follow(other_user)
     unless self == other_user
@@ -31,5 +34,20 @@ class User < ApplicationRecord
   def feed_tweetposts
     Tweetpost.where(user_id: self.following_ids + [self.id])
   end
+  
+  
+  def like(tweetpost)
+    self.likerelationships.find_or_create_by(tweetpost_id: tweetpost.id)
+  end
+
+  def unlike(tweetpost)
+    likerelationship = self.likerelationships.find_by(tweetpost_id: tweetpost.id)
+    likerelationship.destroy if likerelationship
+  end
+
+  def liking?(tweetpost)
+    self.likings.include?(tweetpost)
+  end
+
   
 end
