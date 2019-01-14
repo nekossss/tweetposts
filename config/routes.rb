@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :tweetposts, only: [:create, :destroy]
+  resources :tweetposts, only: [:create, :destroy, :edit]
   resources :relationships, only: [:create, :destroy]
   resources :likerelationships, only: [:create, :destroy]
 end

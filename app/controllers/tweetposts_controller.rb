@@ -19,6 +19,12 @@ class TweetpostsController < ApplicationController
     flash[:success] = 'メッセージを削除しました。'
     redirect_back(fallback_location: root_path)
   end
+  
+  # def edit
+  #   @tweetpost = Tweetpost.find(params[:id])
+  #   flash[:success] = 'メッセージを編集しました。'
+  #   redirect_back(fallback_location: root_path)
+  # end
 
   private
 
