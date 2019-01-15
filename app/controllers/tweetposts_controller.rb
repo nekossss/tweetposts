@@ -20,11 +20,31 @@ class TweetpostsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
   
-  # def edit
-  #   @tweetpost = Tweetpost.find(params[:id])
-  #   flash[:success] = 'メッセージを編集しました。'
-  #   redirect_back(fallback_location: root_path)
-  # end
+  
+  def show
+    @tweetpost = Tweetpost.find(params[:id])
+  end  
+  
+  
+  def edit
+    @tweetpost = Tweetpost.find(params[:id])
+    flash[:success] = 'メッセージを編集しました。'
+    redirect_back(fallback_location: root_path)
+  end
+  
+  def update
+    @tweetpost = Tweetpost.find(params[:id])
+
+    if @tweetpost.update(tweetpost_params)
+      flash[:success] = 'tweetpost は正常に更新されました'
+      redirect_to @tweetpost
+    else
+      flash.now[:danger] = 'tweetpost は更新されませんでした'
+      render :edit
+    end
+  end
+
+
 
   private
 

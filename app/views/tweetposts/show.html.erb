@@ -1,0 +1,10 @@
+<h1>id: <%= @tweetpost.id %> のtweetpost編集ページ</h1>
+
+<%= form_for(@tweetpost) do |f| %>
+  <%= f.label :content, 'tweet内容' %>
+  <%= f.text_field :content %>
+
+  <%= f.submit '編集完了' %>
+<% end %>
+
+<%= link_to '一覧に戻る', root_path %>

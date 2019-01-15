@@ -6,13 +6,13 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   has_secure_password
   
-  has_many :tweetposts
-  has_many :relationships
+  has_many :tweetposts, dependent: :destroy
+  has_many :relationships, dependent: :destroy
   has_many :followings, through: :relationships, source: :follow
   has_many :reverses_of_relationship, class_name: 'Relationship', foreign_key: 'follow_id'
   has_many :followers, through: :reverses_of_relationship, source: :user
   
-  has_many :likerelationships
+  has_many :likerelationships, dependent: :destroy
   has_many :likings, through: :likerelationships, source: :tweetpost
   
   
@@ -48,6 +48,5 @@ class User < ApplicationRecord
   def liking?(tweetpost)
     self.likings.include?(tweetpost)
   end
-
   
 end

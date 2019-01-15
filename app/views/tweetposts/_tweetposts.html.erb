@@ -13,7 +13,7 @@
         </div>
         <% if current_user == tweetpost.user %>
             <%= link_to "Delete", tweetpost, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
-            <!--<%= link_to "Edit", tweetpost, method: :edit, data: { confirm: "You edit?" }, class: 'btn btn-info btn-xs' %>-->
+            <%= link_to "Edit", tweetpost, method: :edit, class: 'btn btn-info btn-xs' %>
         <% end %>
         <%= render 'likerelationships/like_button', tweetpost: tweetpost %>
       </div>
