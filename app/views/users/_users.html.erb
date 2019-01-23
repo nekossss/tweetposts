@@ -11,6 +11,10 @@
           </div>
           <div>
             <p><%= link_to 'View profile', user_path(user) %></p>
+              <% if current_user.admin? && !(current_user == user) %>
+                   ★admin <%= link_to "ユーザー削除", user, method: :delete,
+                                    data: { confirm: "ユーザー削除しますか?" } %>
+              <% end %>
           </div>
         </div>
       </li>
