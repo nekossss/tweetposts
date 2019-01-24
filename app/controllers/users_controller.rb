@@ -28,10 +28,19 @@ class UsersController < ApplicationController
   end
   
   def destroy
-    @user = User.find(params[:id])
-    @user.destroy
-    flash[:success] = '退会しました。'
-    redirect_back(fallback_location: root_path)
+    if current_user.admin?
+      @user = User.find(params[:id])
+      @user.destroy
+      flash[:success] = 'ユーザー削除しました。'
+      redirect_back(fallback_location: root_path)
+    else
+      @user = User.find(params[:id])
+      if current_user == @user
+        @user.destroy
+        flash[:success] = '退会しました。'
+        redirect_back(fallback_location: root_path)
+      end
+    end
   end
   
   def followings
