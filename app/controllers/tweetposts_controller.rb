@@ -1,6 +1,6 @@
 class TweetpostsController < ApplicationController
   before_action :require_user_logged_in
-  before_action :correct_user, only: [:destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   def create
     @tweetpost = current_user.tweetposts.build(tweetpost_params)
@@ -27,14 +27,9 @@ class TweetpostsController < ApplicationController
   
   
   def edit
-    @tweetpost = Tweetpost.find(params[:id])
-    flash[:success] = 'メッセージを編集しました。'
-    redirect_back(fallback_location: root_path)
   end
   
   def update
-    @tweetpost = Tweetpost.find(params[:id])
-
     if @tweetpost.update(tweetpost_params)
       flash[:success] = 'tweetpost は正常に更新されました'
       redirect_to @tweetpost
